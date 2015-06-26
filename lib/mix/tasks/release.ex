@@ -354,7 +354,7 @@ defmodule Mix.Tasks.Release do
     # Re-package release with modifications
     file_list = File.ls!(rel_dest_path(name))
       |> Enum.reject(&(&1 == erts))
-      |> Enum.reject(&(String.match?(&1, ~r/erlang.pipe.1/))
+      |> Enum.reject(&(&1 == "tmp"))
       |> Enum.map(&({'#{&1}', '#{rel_dest_path([name, &1])}'}))
     :ok = :erl_tar.create(
       '#{tarball}',
